@@ -9,8 +9,9 @@ import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
-import IOTDashboardPage from './pages/IOTDashboardPage';
 
+import IOTDashboardPage from './pages/IOTDashboardPage';
+import MonitoringPage from './pages/MonitoringPage';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -21,8 +22,9 @@ export default function Router() {
       children: [
         { element: <Navigate to="/dashboard/app-demo" />, index: true },
         { path: 'app-demo', element: <IOTDashboardPage /> },
-        { path: 'app', element: <DashboardAppPage /> },
         { path: 'user', element: <UserPage /> },
+        { path: 'monitoring', element: <MonitoringPage /> },
+        { path: 'app', element: <DashboardAppPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
       ],
