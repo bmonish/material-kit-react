@@ -29,7 +29,7 @@ import Scrollbar from '../components/scrollbar';
 // sections
 import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
 // mock
-import USERLIST from '../_mock/user';
+import USERLIST, { userTableData } from '../_mock/user';
 
 // ----------------------------------------------------------------------
 
@@ -39,6 +39,19 @@ const TABLE_HEAD = [
   { id: 'role', label: 'Role', alignRight: false },
   { id: 'isVerified', label: 'Verified', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
+  { id: '' },
+];
+
+const DEMO_TABLE = [
+  { id: 'firstNam', label: 'First Name', alignRight: false },
+  { id: 'lastName', label: 'Last Name', alignRight: false },
+  { id: 'email', label: 'Email', alignRight: false },
+  { id: 'designation', label: 'Designation', alignRight: false },
+  { id: 'mandal', label: 'Mandal', alignRight: false },
+  { id: 'district', label: 'District', alignRight: false },
+  { id: 'state', label: 'State', alignRight: false },
+  { id: 'userType', label: 'User Type', alignRight: false },
+  { id: 'access', label: 'Access', alignRight: false },
   { id: '' },
 ];
 
@@ -171,7 +184,7 @@ export default function UserPage() {
                 <UserListHead
                   order={order}
                   orderBy={orderBy}
-                  headLabel={TABLE_HEAD}
+                  headLabel={DEMO_TABLE}
                   rowCount={USERLIST.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
@@ -179,7 +192,19 @@ export default function UserPage() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, role, status, company, avatarUrl, isVerified } = row;
+                    const {
+                      id,
+                      name,
+                      avatarUrl,
+                      lastName,
+                      email,
+                      designation,
+                      mandal,
+                      district,
+                      state,
+                      userType,
+                      access,
+                    } = row;
                     const selectedUser = selected.indexOf(name) !== -1;
 
                     return (
@@ -197,14 +222,25 @@ export default function UserPage() {
                           </Stack>
                         </TableCell>
 
-                        <TableCell align="left">{company}</TableCell>
-
-                        <TableCell align="left">{role}</TableCell>
-
-                        <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
+                        <TableCell align="left">{lastName}</TableCell>
+                        <TableCell align="left">{email}</TableCell>
+                        <TableCell align="left">{designation}</TableCell>
+                        <TableCell align="left">{mandal}</TableCell>
+                        <TableCell align="left">{district}</TableCell>
+                        <TableCell align="left">{state}</TableCell>
+                        <TableCell align="left">{userType}</TableCell>
 
                         <TableCell align="left">
-                          <Label color={(status === 'banned' && 'error') || 'success'}>{sentenceCase(status)}</Label>
+                          <Label
+                            color={
+                              (access === 'denied' && 'error') ||
+                              (access === 'limited' && 'warning') ||
+                              (access === 'full' && 'success') ||
+                              'primary'
+                            }
+                          >
+                            {sentenceCase(access)}
+                          </Label>
                         </TableCell>
 
                         <TableCell align="right">
